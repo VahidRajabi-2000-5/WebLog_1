@@ -43,7 +43,9 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     
     # Local Apps
-    'blog'
+    'blog',
+    'accounts',
+    
 ]
 
 MIDDLEWARE = [
@@ -128,7 +130,11 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
+ 
 # Django-Crispt-Forms
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 CRISPY_ALLOWED_TEMPLATE_PACK = 'bootstrap5'
+
+# Login and Logout and SignUp Settings
+LOGIN_REDIRECT_URL = 'posts_list'
+LOGOUT_REDIRECT_URL = 'login'

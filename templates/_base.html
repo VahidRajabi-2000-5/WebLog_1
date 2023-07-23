@@ -33,11 +33,41 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-            <a class="nav-link active" aria-current="page" href="{% url 'posts_list' %}">Home</a>
+            <a
+              class="nav-link active"
+              aria-current="page"
+              href="{% url 'posts_list' %}"
+              >Home</a
+            >
             <a class="nav-link" href="{% url 'post_create' %}">NewPost</a>
           </div>
         </div>
-        <div class="mx-2 text-white">Welcome</div>
+        <div class="mx-2 text-white">
+          {% if user.is_authenticated %} Welcome {{user.username}} |
+          <a
+            class="text-light"
+            style="text-decoration: none"
+            href="{% url 'logout' %}"
+            >Log Out</a
+          >
+          {% else %}
+          <a
+            class="text-light"
+            style="text-decoration: none"
+            href="{% url 'login' %}"
+            >Log In</a
+          >
+          
+          |
+          
+          <a
+            class="text-light"
+            style="text-decoration: none"
+            href="{% url 'signup' %}"
+            >signup</a
+          >
+          {% endif %}
+        </div>
       </div>
     </nav>
 
