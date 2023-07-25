@@ -1,0 +1,22 @@
+{% extends '_base.html' %} 
+
+{% load crispy_forms_tags %}
+
+{% block title %}Profile{% endblock title %}
+
+{% block content %}
+<div class="container">
+  <div class="cart shadow my-3 p-5">
+      <h1>Username : {{pro.username}}</h1>
+      <br>
+      <h4>ایمیل : {{pro.email}}</h4>
+      <br>
+      <h6>آخرین تاریخ ورود: {{pro.last_login}}</h6>
+      <br>
+      <h6>تاریخ ثبت نام : {{pro.date_joined}}</h6>
+      <div class="container mt-5">
+        <a class='btn btn-success' href="{% url 'password_change' %}">Password Change</a>
+      </div>
+  </div>
+</div>
+{% endblock content %}

@@ -138,3 +138,7 @@ CRISPY_ALLOWED_TEMPLATE_PACK = 'bootstrap5'
 # Login and Logout and SignUp Settings
 LOGIN_REDIRECT_URL = 'posts_list'
 LOGOUT_REDIRECT_URL = 'login'
+
+
+# Email Settings
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
