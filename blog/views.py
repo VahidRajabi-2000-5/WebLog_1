@@ -11,17 +11,18 @@ from .forms import NewPostForm
 
 class PostListView(generic.ListView):
     # model = Post
-    template_name = 'blog/posts_list.html'
-    context_object_name = 'posts'
+    template_name = "blog/posts_list.html"
+    context_object_name = "posts"
 
     def get_queryset(self):
-        return Post.objects.filter(status='Pub').order_by('-datetime_modified')
+        return Post.objects.filter(status="Pub").order_by("-datetime_modified")
 
 
 class PostDetailView(generic.DetailView):
     model = Post
-    template_name = 'blog/post_detail.html'
-    context_object_name = 'post'
+    template_name = "blog/post_detail.html"
+    context_object_name = "post"
+
 
 
 class PostCreateView(LoginRequiredMixin, generic.CreateView):
@@ -29,26 +30,33 @@ class PostCreateView(LoginRequiredMixin, generic.CreateView):
     template_name = 'blog/post_create.html'
     context_object_name = 'form'
 
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
     form_class = NewPostForm
     model = Post
-    template_name = 'blog/post_create.html'
-    context_object_name = 'form'
-    
+    template_name = "blog/post_create.html"
+    context_object_name = "form"
+
     def test_func(self):
         obj = self.get_object()
         return obj.author == self.request.user
 
-class PostDeleteView(LoginRequiredMixin,UserPassesTestMixin,  generic.DeleteView):
+
+class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
     model = Post
     template_name = "blog/post_delete.html"
-    context_object_name = 'post'
-    success_url = reverse_lazy('posts_list')
-    
+    context_object_name = "post"
+    success_url = reverse_lazy("posts_list")
+
     def test_func(self):
         obj = self.get_object()
         return obj.author == self.request.user
+
     # def get_success_url(self):
     #     return reverse('posts_list')
 
@@ -65,7 +73,7 @@ class PostDeleteView(LoginRequiredMixin,UserPassesTestMixin,  generic.DeleteView
 #     if request.method == 'POST':
 #         form = NewPostForm(request.POST)
 #         if form.is_valid():
-#             post = form.save()
+#             post = form.save(author=request.user)
 #             form = NewPostForm()
 #             return redirect(reverse('post_detail', args=[post.id]))
 #     else:  # Get
@@ -93,12 +101,12 @@ class PostDeleteView(LoginRequiredMixin,UserPassesTestMixin,  generic.DeleteView
 # =================================
 # =================================
 # Permission functional view
-# ================================ 
+# ================================
 # @login_required
 # def post_update_view(request, pk):
 #     post = get_object_or_404(Post, pk=pk)
 #     form = NewPostForm(request.POST or None, instance=post)
-#     if post.author == request.user:    
+#     if post.author == request.user:
 #         if form.is_valid():
 #             form.save()
 #             return redirect(reverse('post_detail', args=[post.id]))
@@ -109,7 +117,7 @@ class PostDeleteView(LoginRequiredMixin,UserPassesTestMixin,  generic.DeleteView
 # ============================================
 # def post_delete_view(request,pk):
 #     post = get_object_or_404(Post,pk=pk)
-#     if post.author == request.user:    
+#     if post.author == request.user:
 #         if request.method =='POST':
 #             post.delete()
 #             return redirect('posts_list')

@@ -6,10 +6,10 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-
+from .forms import CustomUserCreateForm
 
 class SignUpView(generic.CreateView):
-    form_class = UserCreationForm
+    form_class = CustomUserCreateForm
     template_name = 'registration/signup.html'
     success_url = reverse_lazy('login')
     
