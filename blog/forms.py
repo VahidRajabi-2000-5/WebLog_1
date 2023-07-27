@@ -25,7 +25,7 @@ class NewPostForm(forms.ModelForm):
         ]
 
     def save(self, commit=True, author=None):
-        post = super().save(commit=False)
+        post = super().save(commit=False)   
         if author:
             post.author = author
         if commit:

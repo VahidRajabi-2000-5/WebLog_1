@@ -69,6 +69,7 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView
 #     post = get_object_or_404(Post, pk=pk)
 #     return render(request, 'blog/post_detail.html', {'post': post})
 # ==========================================
+
 # def post_create_view(request):
 #     if request.method == 'POST':
 #         form = NewPostForm(request.POST)
@@ -79,6 +80,7 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView
 #     else:  # Get
 #         form = NewPostForm()
 #     return render(request, 'blog/post_create.html', {'form': form})
+
 # ==========================================
 
 # def post_update_view(request, pk):
